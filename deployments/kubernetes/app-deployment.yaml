@@ -22,7 +22,7 @@ spec:
         app: app
     spec:
       containers:
-      - image: hellodk/app:v3
+      - image: hellodk/app:v5
         imagePullPolicy: IfNotPresent
         name: app
         ports:

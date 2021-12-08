@@ -1,28 +1,38 @@
-apiVersion: v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  creationTimestamp: "2021-12-08T05:42:36Z"
   labels:
     app: app
   name: app
   namespace: demo
-  resourceVersion: "1377180"
-  uid: a60ce9e8-06eb-45d9-9f4e-1e2d3b792602
 spec:
-  clusterIP: 10.233.47.216
-  clusterIPs:
-  - 10.233.47.216
-  internalTrafficPolicy: Cluster
-  ipFamilies:
-  - IPv4
-  ipFamilyPolicy: SingleStack
-  ports:
-  - port: 5000
-    protocol: TCP
-    targetPort: 5000
+  replicas: 1
   selector:
-    app: app
-  sessionAffinity: None
-  type: ClusterIP
-status:
-  loadBalancer: {}
+    matchLabels:
+      app: app
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: app
+    spec:
+      containers:
+      - image: hellodk/app:v3
+        imagePullPolicy: IfNotPresent
+        name: app
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

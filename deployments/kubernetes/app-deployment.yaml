@@ -1,20 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "1"
-  creationTimestamp: "2021-12-08T05:41:55Z"
-  generation: 1
   labels:
     app: app
   name: app
   namespace: demo
-  resourceVersion: "1377076"
-  uid: 97299286-17af-4c8e-85d8-9b84c8bcde31
 spec:
-  progressDeadlineSeconds: 600
   replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: app
@@ -30,7 +22,7 @@ spec:
         app: app
     spec:
       containers:
-      - image: hellodk/app:v2
+      - image: hellodk/app:v3
         imagePullPolicy: IfNotPresent
         name: app
         ports:
@@ -44,21 +36,3 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-status:
-  conditions:
-  - lastTransitionTime: "2021-12-08T05:41:55Z"
-    lastUpdateTime: "2021-12-08T05:41:55Z"
-    message: Deployment does not have minimum availability.
-    reason: MinimumReplicasUnavailable
-    status: "False"
-    type: Available
-  - lastTransitionTime: "2021-12-08T05:41:55Z"
-    lastUpdateTime: "2021-12-08T05:41:55Z"
-    message: ReplicaSet "app-774796787c" is progressing.
-    reason: ReplicaSetUpdated
-    status: "True"
-    type: Progressing
-  observedGeneration: 1
-  replicas: 1
-  unavailableReplicas: 1
-  updatedReplicas: 1

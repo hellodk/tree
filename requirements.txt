@@ -1,5 +1,6 @@
 attrs==21.2.0
 Flask-Testing==0.8.1
+Flask-RESTful==0.3.9
 iniconfig==1.1.1
 packaging==21.3
 pluggy==1.0.0

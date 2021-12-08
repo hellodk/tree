@@ -4,6 +4,9 @@
 minikube is installed
 Local DNS entry is made for local.ecosia.org and it points to the minikube ip
 
+The script for automated deployment is in the deployments directory.
+Invoke the script as sh build-and-deploy.sh and it will deploy the application along with it's service and ingress
+
 # Commands to run
 # Start minikube
 minikube start --kubernetes-version=v1.22.2 --cpus 2 --memory 8196
